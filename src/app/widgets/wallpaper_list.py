@@ -14,4 +14,6 @@ def get_wallpapers():
 
 def gen_ListView():
     wallpapers = get_wallpapers()
-    return VimListView(*[ListItem(Label(path.name)) for path in wallpapers])
+    return VimListView(
+        *[ListItem(Label(path.name)) for path in wallpapers], id="file-list"
+    )

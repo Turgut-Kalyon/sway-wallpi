@@ -1,0 +1,17 @@
+Horizontal {
+  height: 1fr;
+}
+
+#file-list {
+  width: 30%;
+  min-width: 20;
+  border-right: solid $primary;
+}
+
+#preview {
+  width: 50;
+  height: auto;
+  content-align: center middle;
+}
+
+
