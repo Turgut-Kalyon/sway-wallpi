@@ -10,9 +10,15 @@ from app.config.config_loader import PATH_DATA
 from pathlib import Path
 from textual import work
 from PIL import Image as PILImage
+from textual.timer import Timer
 
 
 class WallpiApp(App):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self._latest_requested_path: Path | None = None
+        self._preview_timer: Timer | None = None
+
     ENABLE_COMMAND_PALETTE = False
     BINDINGS = [
         ("q", "quit", "Quit"),
@@ -32,6 +38,17 @@ class WallpiApp(App):
         yield Footer()
 
     def load_preview(self, image_path: Path) -> None:
+        self._latest_reguested_path = image_path
+        if self._preview_timer is not None:
+            self._preview_timer.stop()
+        self._preview_timer = self.set_timer(
+            0.08,
+            lambda: self._trigger_preview_load(image_path),
+        )
+
+    def _trigger_preview_load(self, image_path: Path) -> None:
+        if image_path != self._latest_reguested_path:
+            return
         preview_widget = self.query_one("#preview", Image)
         cell_width = preview_widget.size.width or 60
         cell_height = preview_widget.size.height or 30
@@ -39,7 +56,7 @@ class WallpiApp(App):
         target_size = (cell_width * 10, cell_height * 20)
         self._load_and_resize(image_path, target_size)
 
-    @work(thread=True)
+    @work(thread=True, exclusive=True, group="preview_load")
     def _load_and_resize(self, image_path: Path, target_size: tuple[int, int]) -> None:
         width, height = target_size
         if width <= 0 or height <= 0:
@@ -48,9 +65,11 @@ class WallpiApp(App):
 
         pil_img = PILImage.open(image_path)
         pil_img.thumbnail((width, height))
-        self.call_from_thread(self._set_preview_image, pil_img)
+        self.call_from_thread(self._set_preview_image, pil_img, image_path)
 
-    def _set_preview_image(self, pil_img) -> None:
+    def _set_preview_image(self, pil_img, image_path: Path | None = None) -> None:
+        if image_path is not None and image_path != self._latest_reguested_path:
+            return
         self.query_one("#preview", Image).image = pil_img
 
     def on_list_view_highlighted(self, event: ListView.Highlighted) -> None:
