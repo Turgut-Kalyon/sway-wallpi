@@ -10,3 +10,21 @@ class VimListView(ListView):
         Binding("up", "cursor_up", show=False),
         Binding("enter", "select_cursor", show=False),
     ]
+
+    def action_cursor_down(self) -> None:
+        if self.index is None:
+            return
+
+        if self.index >= len(self) - 1:
+            self.index = 0
+        else:
+            super().action_cursor_down()
+
+    def action_cursor_up(self) -> None:
+        if self.index is None:
+            return
+
+        if self.index <= 0:
+            self.index = len(self) - 1
+        else:
+            super().action_cursor_up()
