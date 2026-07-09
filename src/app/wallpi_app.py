@@ -38,7 +38,7 @@ class WallpiApp(App):
         yield Footer()
 
     def load_preview(self, image_path: Path) -> None:
-        self._latest_reguested_path = image_path
+        self._latest_requested_path = image_path
         if self._preview_timer is not None:
             self._preview_timer.stop()
         self._preview_timer = self.set_timer(
@@ -47,7 +47,7 @@ class WallpiApp(App):
         )
 
     def _trigger_preview_load(self, image_path: Path) -> None:
-        if image_path != self._latest_reguested_path:
+        if image_path != self._latest_requested_path:
             return
         preview_widget = self.query_one("#preview", Image)
         cell_width = preview_widget.size.width or 60
@@ -56,7 +56,7 @@ class WallpiApp(App):
         target_size = (cell_width * 10, cell_height * 20)
         self._load_and_resize(image_path, target_size)
 
-    @work(thread=True, exclusive=True, group="preview_load")
+    @work(thread=True)
     def _load_and_resize(self, image_path: Path, target_size: tuple[int, int]) -> None:
         width, height = target_size
         if width <= 0 or height <= 0:
@@ -68,7 +68,7 @@ class WallpiApp(App):
         self.call_from_thread(self._set_preview_image, pil_img, image_path)
 
     def _set_preview_image(self, pil_img, image_path: Path | None = None) -> None:
-        if image_path is not None and image_path != self._latest_reguested_path:
+        if image_path is not None and image_path != self._latest_requested_path:
             return
         self.query_one("#preview", Image).image = pil_img
 
