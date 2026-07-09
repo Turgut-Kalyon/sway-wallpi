@@ -1,16 +1,15 @@
 import os
 from pathlib import Path
+from PIL import Image as PILImage
+from textual import work
 from textual.app import App
 from textual.containers import Horizontal
 from textual.widgets import Footer, Header, ListView, Label
-from app.widgets.wallpaper_list import gen_ListView, get_wallpapers
+from textual.timer import Timer
 from textual_image.widget import Image
+from app.widgets.wallpaper_list import gen_ListView, get_wallpapers
 from app.link.link_wp import new_link
 from app.config.config_loader import PATH_DATA
-from pathlib import Path
-from textual import work
-from PIL import Image as PILImage
-from textual.timer import Timer
 
 
 class WallpiApp(App):
