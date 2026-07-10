@@ -11,7 +11,7 @@ from app.widgets.wallpaper_list import gen_ListView, get_wallpapers
 from app.link.link_wp import new_link
 from app.config.config_loader import PATH_DATA
 
-
+# TODO write more docstrings
 class WallpiApp(App):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
