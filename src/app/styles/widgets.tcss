@@ -1,17 +1,48 @@
+* {
+  scrollbar-color: #b7bdf8;
+  scrollbar-color-hover: #c6cdff;
+  scrollbar-color-active: #8087cf;
+  scrollbar-background: #1e2030;
+}
+
+*:focus {
+  border: round #b7bdf8;
+}
+
+#header {
+  background: #24273a;
+  color: #b7bdf8;
+}
+
+#footer {
+  background: #24273a;
+  color: #b7bdf8;
+}
+
 Horizontal {
   height: 1fr;
+  background: #24273a;
+}
+
+#preview {
+  width: 60%;
+  height: auto;
+  content-align: center middle;
+  border: round #b7bdf8;
 }
 
 #file-list {
   width: 30%;
   min-width: 20;
-  border-right: solid $primary;
+  background: #24273a;
+  color: #b7bdf8;
+  border: round #494d64;
 }
 
-#preview {
-  width: 50;
-  height: auto;
-  content-align: center middle;
+#file-list > ListItem.-highlight,
+#file-list > ListItem.--highlight,
+#file-list ListItem.-highlight,
+#file-list ListItem.--highlight {
+  background: #b7bdf8;
+  color: #24273a;
 }
-
-
