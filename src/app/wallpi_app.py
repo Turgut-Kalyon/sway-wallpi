@@ -43,7 +43,7 @@ class WallpiApp(App):
         if self._preview_timer is not None:
             self._preview_timer.stop()
         self._preview_timer = self.set_timer(
-            0.08,
+            0.05,
             lambda: self._trigger_preview_load(image_path),
         )
 
