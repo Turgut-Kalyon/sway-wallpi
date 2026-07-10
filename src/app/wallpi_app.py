@@ -33,6 +33,11 @@ class WallpiApp(App):
             yield Image(id="preview")
         yield Footer()
 
+    def on_mount(self) -> None:
+        self.title = "Wallpi"
+        self.sub_title = f"{len(self.wallpapers)} wallpapers"
+        self.query_one(Header).icon = ""
+
     def load_preview(self, image_path: Path) -> None:
         self._latest_requested_path = image_path
         if self._preview_timer is not None:
