@@ -25,13 +25,13 @@ class WallpiApp(App):
     def compose(self):
         """What widgets is this app composed of?"""
 
-        yield Header(show_clock=True)
+        yield Header(id="header", show_clock=True)
         with Horizontal():
             self.wallpapers = get_wallpapers()
             self.list_view = gen_ListView()
             yield self.list_view
             yield Image(id="preview")
-        yield Footer()
+        yield Footer(id="footer")
 
     def on_mount(self) -> None:
         self.title = "Wallpi"
