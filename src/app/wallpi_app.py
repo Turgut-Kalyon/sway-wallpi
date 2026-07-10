@@ -19,10 +19,7 @@ class WallpiApp(App):
         self._preview_timer: Timer | None = None
 
     ENABLE_COMMAND_PALETTE = False
-    BINDINGS = [
-        ("q", "quit", "Quit"),
-        ("t", "toggle_dark_mode", "Toggle dark mode"),
-    ]
+    BINDINGS = [("q", "quit", "Quit")]
     CSS_PATH = "./styles/widgets.tcss"
 
     def compose(self):
@@ -77,9 +74,6 @@ class WallpiApp(App):
         filename = str(event.item.query_one(Label).content)
         image_path = Path(PATH_DATA["wallpaper_dir"]).expanduser() / filename
         self.load_preview(image_path)
-
-    def action_toggle_dark_mode(self):
-        self.theme = "textual-light" if self.theme == "textual-dark" else "textual-dark"
 
     def on_list_view_selected(self, event: ListView.Selected) -> None:
         index = event.list_view.index
