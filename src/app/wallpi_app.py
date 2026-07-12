@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-from PIL import Image as PILImage
 from textual import work
 from textual.app import App
 from textual.containers import Horizontal
@@ -10,6 +9,7 @@ from textual_image.widget import Image
 from app.widgets.wallpaper_list import gen_ListView, get_wallpapers
 from app.link.link_wp import new_link
 from app.config.config_loader import PATH_DATA
+
 
 # TODO write more docstrings
 class WallpiApp(App):
@@ -63,6 +63,7 @@ class WallpiApp(App):
         if width <= 0 or height <= 0:
             # Fallback
             width, height = 600, 600
+        from PIL import Image as PILImage
 
         pil_img = PILImage.open(image_path)
         pil_img.thumbnail((width, height))
