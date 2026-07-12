@@ -19,7 +19,9 @@ def new_link(target_link: Path, wallpaper: Path):
     # we need to reload sway ... otherwise the wallpaper does not change...
     if AUTO_RELOAD:
         sway_reloading = subprocess.run(
-            ["sway", "reload"], capture_output=True, text=True
+            ["swaymsg", "output", '"*"', "bg", target_link, "fill"],
+            capture_output=True,
+            text=True,
         )
         response = None
 
