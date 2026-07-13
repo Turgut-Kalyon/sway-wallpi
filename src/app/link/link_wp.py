@@ -52,7 +52,7 @@ def exec_set_wallpaper(target_link: Path):
         )
     elif shutil.which("swaybg"):
         process = subprocess.run(
-            ["swaybg", "-o", "'*'", "-i", target_link, "-m", "fill"],
+            ["swaybg", "-o", "*", "-i", target_link, "-m", "fill"],
             capture_output=True,
             text=True,
         )
