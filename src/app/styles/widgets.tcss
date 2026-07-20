@@ -3,6 +3,7 @@
   scrollbar-color-hover: #c6cdff;
   scrollbar-color-active: #8087cf;
   scrollbar-background: #1e2030;
+  scrollbar-size-vertical: 1;
 }
 
 *:focus {
