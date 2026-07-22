@@ -14,8 +14,8 @@ from textual.widgets import Footer, Header, ListView, Label
 from textual.timer import Timer
 from textual_image.widget import Image
 from app.widgets.wallpaper_list import gen_ListView, get_wallpapers
-from app.link.link_wp import new_link
-from app.config.config_loader import PATH_DATA
+from app.core.link.link_wp import new_link
+from app.core.config.config_loader import PATH_DATA
 
 
 class WallpiApp(App):

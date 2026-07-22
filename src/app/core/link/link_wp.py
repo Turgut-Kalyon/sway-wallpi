@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
-from app.config.config_loader import BEHAVIOUR_DATA
+from app.core.config.config_loader import BEHAVIOUR_DATA
 
 AUTO_RELOAD = BEHAVIOUR_DATA["auto_reload"]
 
