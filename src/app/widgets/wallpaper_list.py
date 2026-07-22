@@ -1,4 +1,4 @@
-from app.config.config_loader import PATH_DATA
+from app.core.config.config_loader import PATH_DATA
 from app.widgets.vim_list_view import VimListView
 from textual.widgets import ListItem, Label
 import os
